@@ -1,0 +1,8 @@
+First off, make sure the Debian server is setup with SSH, and that you can connect with ssh, and have sudo access.
+If you set a Root password on the server, you would need to install sudo.
+    [[ su ]]
+    [[ apt-get install sudo ]]
+    [[ usermod -aG sudo <username> ]]
+Next, make sure you python is installed 
+    [[ sudo apt-get install python-pip ]]
+Then, make sure the hosts file for the playbook has the username & password for the target server.
