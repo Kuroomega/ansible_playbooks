@@ -24,4 +24,4 @@ docker_group_members: []
 update_docker_package: yes
 
 # webmin download location
-webmin_dl_url: https://www.webmin.com/download/deb/webmin-current.deb
+webmin_dl_url: http://www.webmin.com/download/deb/webmin-current.deb

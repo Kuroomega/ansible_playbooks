@@ -2,7 +2,7 @@
 
 - name: install webmin
   apt:
-    deb: webmin_dl_url
+    deb: "{{ webmin_dl_url }}"
 
 - name: install packages required by docker
   apt:
