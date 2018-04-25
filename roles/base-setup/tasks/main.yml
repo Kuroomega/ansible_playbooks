@@ -48,6 +48,7 @@
 
 - name: docker tasks for base-setup
   docker_service:
+    project_name: base-setup
     definition:
       version: "2"
       services:
