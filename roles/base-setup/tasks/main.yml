@@ -46,6 +46,11 @@
     uid: "{{ docker_puid }}"
     groups: docker
 
+- name: make sure we have python dependancies on remote for docker tasks
+  pip:
+    name: docker-compose
+    version: 1.9.0
+
 - name: docker tasks for base-setup
   docker_service:
     project_name: base-setup
