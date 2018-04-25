@@ -53,7 +53,7 @@
 
 - name: copy traefik.toml config file to proper location
   copy:
-    src: roles/base-setup/files/traefik/s
+    src: roles/base-setup/files/traefik/
     dest: /home/{{ my_username }}/traefik/
 
 - name: docker tasks for base-setup
