@@ -36,3 +36,5 @@ docker_puid: 1100
 # User information for duckdns
 my_duckdns_token: cf947271-b63e-4f3f-b8e4-d41d381dc675
 my_duckdns_domains: garjon
+
+my_real_domain: garjon.duckdns.org

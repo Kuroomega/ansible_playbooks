@@ -83,7 +83,7 @@
           command: --templates http://templates/templates.json
           volumes:
             - /var/run/docker.sock:/var/run/docker.sock
-            - /home/{{ my_username }}/docker/portainer/data:/data
+            - /home/{{ my_username }}/portainer/data:/data
           ports:
             - "9000:9000"
           environment:
@@ -91,7 +91,7 @@
           labels:
             - "traefik.enable=true"
             - "traefik.port=9000"
-            - "traefik.frontend.rule=Host:portainer.garjon.duckdns.org"
+            - "traefik.frontend.rule=Host:portainer.{{ my_real_domain }}"
 
 - name: duckdns
   docker_service:
@@ -126,3 +126,25 @@
             - /var/run/docker.sock:/var/run/docker.sock:ro
             - /home/{{ my_username }}/traefik/traefik.toml:/etc/traefik/traefik.toml
             - /home/{{ my_username }}/traefik/acme.json:/acme.json
+
+- name: heimdall
+  docker_service:
+    project_name: base-setup
+    definition:
+      version: "2"
+      services:
+        heimdall:
+          container_name: heimdall
+          image: linuxserver/heimdall
+          volumes:
+            - /home/{{ my_username }}/heimdall:/config
+          environment:
+            - PGID="{{ docker_puid }}"
+            - TZ="{{ my_tz }}"
+          ports:
+            - 6000:80
+            - 6001:443
+          labels:
+            - "traefik.enable=true"
+            - "traefik.port=6001"
+            - "traefik.frontend.rule=Host:heimdall.{{ my_real_domain }}"                                  
