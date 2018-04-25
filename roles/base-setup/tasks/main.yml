@@ -40,7 +40,7 @@
 
 - name: create user for docker tasks
   user:
-    name: ""{{ my_username }}""
+    name: "{{ my_username }}"
     comment: user for media server tasks
     uid: {{ docker_puid }}
     groups: docker
