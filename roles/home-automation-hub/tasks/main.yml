@@ -1,0 +1,27 @@
+- name: home assistant
+  docker_service:
+    project_name: base-setup
+    definition:
+      version: "2"
+      services:
+        portainer:
+          image: homeassistant/home-assistant
+          restart: always
+          container_name: homeassistant
+          volumes:
+            - /home/{{ my_username }}/homeassistant/config:/config
+            - /etc/localtime:/etc/localtime:ro
+            - /home/{{ my_username }}/homeassistant/certs:/certs
+          devices:
+            - /dev/ttyUSB0:/dev/ttyUSB0
+            - /dev/ttyUSB1:/dev/ttyUSB1
+            - /dev/ttyACM0:/dev/ttyACM0
+          network_mode: host
+          privileged: true
+          environment:
+            - PGID="{{ docker_puid }}"
+            - TZ="{{ my_tz }}"
+          labels:
+            - "traefik.enable=true"
+            - "traefik.port=8123"
+            - "traefik.frontend.rule=Host:homeassistant.{{ my_real_domain }}"

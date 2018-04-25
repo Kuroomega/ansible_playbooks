@@ -1,0 +1,6 @@
+# duckdns / traefik settings
+my_real_domain: garjon.duckdns.org
+
+# User information for docker tasks
+my_username: mediaserver
+docker_puid: 1100

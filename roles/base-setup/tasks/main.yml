@@ -118,6 +118,7 @@
         traefik:
           container_name: traefik
           image: traefik
+          restart: always
           ports:
             - 80:80
             - 443:443
@@ -127,24 +128,25 @@
             - /home/{{ my_username }}/traefik/traefik.toml:/etc/traefik/traefik.toml
             - /home/{{ my_username }}/traefik/acme.json:/acme.json
 
-- name: heimdall
-  docker_service:
-    project_name: base-setup
-    definition:
-      version: "2"
-      services:
-        heimdall:
-          container_name: heimdall
-          image: linuxserver/heimdall
-          volumes:
-            - /home/{{ my_username }}/heimdall:/config
-          environment:
-            - PGID="{{ docker_puid }}"
-            - TZ="{{ my_tz }}"
-          ports:
-            - 6000:80
-            - 6001:443
-          labels:
-            - "traefik.enable=true"
-            - "traefik.port=6001"
-            - "traefik.frontend.rule=Host:heimdall.{{ my_real_domain }}"                                  
+#- name: heimdall
+#  docker_service:
+#    project_name: base-setup
+#    definition:
+#      version: "2"
+#      services:
+#        heimdall:
+#          container_name: heimdall
+#          image: linuxserver/heimdall
+#          restart: always
+#          volumes:
+#            - /home/{{ my_username }}/heimdall:/config
+#          environment:
+#            - PGID="{{ docker_puid }}"
+#            - TZ="{{ my_tz }}"
+#          ports:
+#            - 6000:80
+#            - 6001:443
+#          labels:
+#            - "traefik.enable=true"
+#            - "traefik.port=6001"
+#            - "traefik.frontend.rule=Host:heimdall.{{ my_real_domain }}"                                  
