@@ -117,9 +117,9 @@
       services:
         traefik:
           container_name: traefik
-          image: traefik:alpine
+          image: traefik
           ports:
-            - 80:80s
+            - 80:80
             - 443:443
             - 8080:8080
           volumes:
