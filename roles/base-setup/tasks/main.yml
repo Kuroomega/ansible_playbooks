@@ -49,6 +49,8 @@
 - name: docker tasks for base-setup
   docker_service:
     definition:
+      version: "2"
+      services:
         watchtower:
           container_name: watchtower
           restart: always
