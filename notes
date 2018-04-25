@@ -2,9 +2,12 @@ First off, make sure the Debian server is setup with SSH, and that you can conne
 If you set a Root password on the server, you would need to install sudo.
     [[ su ]]
     [[ apt-get install sudo ]]
+If you want the user to be able to use Webmin, add them to the sudoer group
     [[ usermod -aG sudo <username> ]]
 Next, make sure python is installed
     [[ sudo apt-get install python-pip ]]
 Also, have the sudoer be password-less
-    "%sudo   ALL=NOPASSWD: ALL"
-Then, make sure the hosts file for the playbook has the username & password for the target server.
+    "[username]   ALL=NOPASSWD: ALL"
+Then, set the hosts file for the playbook to have the username & password for the target server.
+You should then be able to run the playbook.
+    [[ ansible-playbook main.yml -i ./hosts ]]
