@@ -25,3 +25,10 @@ update_docker_package: yes
 
 # webmin download location
 webmin_dl_url: http://www.webmin.com/download/deb/webmin-current.deb
+
+# timezone
+my_tz: America/Los_Angeles
+
+# User information for docker tasks
+my_username: mediaserver
+docker_pgid: 999

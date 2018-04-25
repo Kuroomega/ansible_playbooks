@@ -37,3 +37,33 @@
   service:
     name: docker
     state: started
+
+- name: create user for docker tasks
+  user:
+    name: {{ my_username }}
+    comment: user for media server tasks
+    uid: {{ docker_puid }}
+    groups: docker
+
+- name: docker tasks for base-setup
+  docker_service:
+    definition:
+        watchtower:
+          container_name: watchtower
+          restart: always
+          image: v2tec/watchtower
+          volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+          command: --schedule "0 0 4 * * *" --cleanup
+        portainer:
+          image: portainer/portainer
+          restart: always
+          container_name: portainer
+          command: --templates http://templates/templates.json
+          volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /home/{{ my_username }}/docker/portainer/data:/data
+          ports:
+            - "9000:9000"
+          environment:
+            - TZ={{ my_tz }}
