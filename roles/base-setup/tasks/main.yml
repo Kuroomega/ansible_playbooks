@@ -76,3 +76,12 @@
             - "9000:9000"
           environment:
             - TZ="{{ my_tz }}"
+        duckdns:
+          container_name: duckdns
+          restart: always
+          image: linuxserver/duckdns
+          environment:
+            - PGID="{{ docker_puid }}"
+            - TZ="{{ my_tz }}"
+            - SUBDOMAINS="{{ my_duckdns_domains }}"
+            - TOKEN="{{ my_duckdns_token }}"
