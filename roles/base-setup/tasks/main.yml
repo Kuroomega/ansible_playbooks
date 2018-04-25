@@ -91,7 +91,7 @@
           labels:
             - "traefik.enable=true"
             - "traefik.port=9000"
-            - "traefik.frontend.rule=Host:portainer.garjon.duckdns.com"
+            - "traefik.frontend.rule=Host:portainer.garjon.duckdns.org"
 
 - name: duckdns
   docker_service:
