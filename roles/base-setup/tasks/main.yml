@@ -51,6 +51,11 @@
     name: docker-compose
     version: 1.9.0
 
+- name: copy traefik.toml config file to proper location
+  copy:
+    src: roles/base-setup/defaults/traefik.toml
+    dest: /home/{{ my_username }}/traefik/traefik.toml
+
 - name: docker tasks for base-setup
   docker_service:
     project_name: base-setup
@@ -76,6 +81,10 @@
             - "9000:9000"
           environment:
             - TZ="{{ my_tz }}"
+          labels:
+            - "traefik.enable=true"
+            - "traefik.port=9000"
+            - "traefik.frontend.rule=Host:portainer.garjon.duckdns.com"
         duckdns:
           container_name: duckdns
           restart: always
@@ -85,3 +94,14 @@
             - TZ="{{ my_tz }}"
             - SUBDOMAINS="{{ my_duckdns_domains }}"
             - TOKEN="{{ my_duckdns_token }}"
+        traefik:
+          container_name: traefik
+          image: traefik:alpine
+          ports:
+            - 80:80s
+            - 443:443
+            - 8080:8080
+          volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - /home/{{ my_username }}/traefik/traefik.toml:/etc/traefik/traefik.toml
+            - /home/{{ my_username }}/traefik/acme.json:/acme.json
