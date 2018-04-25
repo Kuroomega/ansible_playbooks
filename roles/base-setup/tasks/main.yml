@@ -71,7 +71,7 @@
           command: --templates http://templates/templates.json
           volumes:
             - /var/run/docker.sock:/var/run/docker.sock
-            - /home/"{{ my_username }}"/docker/portainer/data:/data
+            - /home/{{ my_username }}/docker/portainer/data:/data
           ports:
             - "9000:9000"
           environment:
