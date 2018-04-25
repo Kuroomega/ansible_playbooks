@@ -31,4 +31,4 @@ my_tz: America/Los_Angeles
 
 # User information for docker tasks
 my_username: mediaserver
-docker_pgid: 999
+docker_puid: 1100
