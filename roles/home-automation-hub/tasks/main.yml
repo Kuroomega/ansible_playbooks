@@ -1,10 +1,10 @@
 - name: home assistant
   docker_service:
-    project_name: base-setup
+    project_name: home-automation-hub
     definition:
       version: "2"
       services:
-        portainer:
+        homeassistant:
           image: homeassistant/home-assistant
           restart: always
           container_name: homeassistant

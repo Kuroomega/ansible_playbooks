@@ -6,7 +6,7 @@
   roles:
     - base-setup
 #    - nas
-#    - home-automation-hub
+    - home-automation-hub
 #    - home-media-center-base
 #    - video-media
 #    - audio-media
